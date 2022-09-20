@@ -55,7 +55,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<< Updated upstream
     "last_opened_file_path": "F:/practiceJavaAndSpring/Project/course",
+=======
+    "last_opened_file_path": "F:/practiceJavaAndSpring/Project/Notification",
+>>>>>>> Stashed changes
     "spring.configuration.checksum": "bf08f48bcdb9573abe84f5d99fe4b7a9"
   }
 }]]></component>
@@ -79,6 +83,10 @@
       <workItem from="1663450276398" duration="1600000" />
       <workItem from="1663544222058" duration="1822000" />
       <workItem from="1663609501767" duration="6337000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1663704736133" duration="1235000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
