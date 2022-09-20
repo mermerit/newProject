@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 public class ResponceVo {
 
     private UserEntity userEntity;
-    private Course course;
+    private UserWithCourses userWithCourses;
+
+
 
 
 }

@@ -3,6 +3,7 @@ package com.example.course.Infrastructure.UserCourseEntity.Service;
 import com.example.course.Infrastructure.UserCourseEntity.UserEntity;
 import com.example.course.Infrastructure.UserCourseEntity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +20,12 @@ public class UserService {
 
     }
 
+
     public UserEntity addUser(UserEntity user)
     {
      return userRepository.save(user);
     }
+
     public List <UserEntity>getAll(){
         return userRepository.findAll();
     }
@@ -43,6 +46,7 @@ public class UserService {
         return theUser;
 
     }
+
     public UserEntity updateUser(UserEntity userEntity){
 
         return userRepository.save(userEntity);

@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Course {
+public class CourseList {
     private Integer courseId;
     private String name;
-    private Float cost;
+    private Float price;
 }

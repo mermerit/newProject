@@ -2,14 +2,13 @@ package com.example.user.Infrastructure.Jpa;
 
 import com.example.user.Domain.User;
 import com.example.user.Domain.UserPort;
-import com.example.user.Infrastructure.VO.Course;
+import com.example.user.Infrastructure.VO.CourseList;
 import com.example.user.Infrastructure.VO.ResponceVo;
+import com.example.user.Infrastructure.VO.UserWithCourses;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -106,12 +105,12 @@ public class UserJpaAdapter implements UserPort {
     {
         ResponceVo vo= new ResponceVo();
         UserEntity userEntity = userRepository.findByUserId(id);
-        Course course
-                =restTemplate.getForObject("http://localhost:8001/api/course/" + userEntity.getCourseId(),
-                Course.class);
+        UserWithCourses userWithCourses
+                =restTemplate.getForObject("http://localhost:8001/api/user/" + userEntity.getGetUserWithCourse(),
+                UserWithCourses.class);
 
         vo.setUserEntity(userEntity);
-        vo.setCourse(course);
+        vo.setUserWithCourses(userWithCourses);
 
 
         return vo;

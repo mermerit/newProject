@@ -5,6 +5,7 @@ import com.example.course.Domain.Course;
 import com.example.course.Infrastructure.Jpa.CourseEntity;
 import com.example.course.Infrastructure.UserCourseEntity.CourseList;
 import com.example.course.Infrastructure.UserCourseEntity.UserEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public interface CourseController {
 
     @PutMapping("/course")
     Course updateCourse(@RequestBody Course course);
+
 
     @PostMapping("/user")
     UserEntity add(@RequestBody UserEntity userEntity);

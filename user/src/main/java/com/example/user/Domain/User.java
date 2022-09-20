@@ -3,10 +3,12 @@ package com.example.user.Domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class User {
 
@@ -14,10 +16,8 @@ public class User {
     private String name;
     private String userName;
     private String password;
-    private Integer courseId;
+    private Integer getUserWithCourse;
 
-    public User (){
-        super();
-    }
+
 
 }

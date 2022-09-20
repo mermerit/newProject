@@ -4,6 +4,7 @@ import com.example.course.Domain.Course;
 import com.example.course.Domain.CoursePort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class CourseJpaAdapter implements CoursePort {
     }
 
     @Override
+
     public List<Course> getAllCourse() {
         List <Course> courseList = new ArrayList<>();
         List<CourseEntity> courseEntityList = courseRepository.findAll();

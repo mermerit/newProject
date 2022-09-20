@@ -2,15 +2,18 @@ package com.example.course.Infrastructure.Controller;
 
 import com.example.course.Domain.Course;
 
+import com.example.course.Infrastructure.Notifications.Notification.UserNotificationConfig;
 import com.example.course.Infrastructure.Service.CourseService;
 import com.example.course.Infrastructure.UserCourseEntity.Service.UserService;
 import com.example.course.Infrastructure.UserCourseEntity.UserEntity;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api")
@@ -18,6 +21,8 @@ public class CourseControllerImpl implements CourseController {
     private CourseService courseService;
     @Autowired
     private UserService userService;
+    @Autowired
+    RabbitTemplate template;
 
     @Autowired
     public CourseControllerImpl(CourseService courseService){
@@ -53,14 +58,20 @@ public class CourseControllerImpl implements CourseController {
         return courseService.updateCourse(course);
     }
 
+
+
     @Override
+
     public UserEntity add(UserEntity userEntity) {
+        template.convertAndSend(UserNotificationConfig.EXCHANGE,UserNotificationConfig.ROUTING_KEYS,userEntity);
+        userEntity.setId(userEntity.getId());
 
         return userService.addUser(userEntity);
 
     }
 
     @Override
+
     public List<UserEntity> getAll() {
 
         return userService.getAll();
