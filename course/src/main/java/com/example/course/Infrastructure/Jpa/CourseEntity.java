@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "course")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,11 +19,8 @@ public class CourseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Integer courseId;
-    @Column
     private String name;
-    @Column
     private Float price;
 
 

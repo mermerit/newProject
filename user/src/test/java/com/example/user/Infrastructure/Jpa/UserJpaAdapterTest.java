@@ -13,9 +13,13 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserJpaAdapterTest {
@@ -33,7 +37,6 @@ class UserJpaAdapterTest {
         autoCloseable.close();
     }
 
-
     @Test
     void addUser() {
 
@@ -50,21 +53,51 @@ class UserJpaAdapterTest {
 
     @Test
     void getAllUser() {
+        UserEntity user = new UserEntity(1,"meran","mermer","123",1);
+
+        List<UserEntity> userEntity = Collections.singletonList(user);
+
+
+        Mockito.when(userRepository.findAll()).thenReturn(userEntity);
+        List <User> users=undertest.getAllUser();
+        assertThat(users.size()).isEqualTo(1);
     }
 
     @Test
     void removeUser() {
+        UserEntity entity = new UserEntity(10,"meran","mermer","123",1);
+        Mockito.when(userRepository.findByUserId(1)).thenReturn(entity);
+        undertest.removeUser(1);
+        verify(userRepository).delete(entity);
+    }
 
-
-
-
-
-
+    @Test
+    void removeUserThrowsError() {
+        Mockito.when(userRepository.findByUserId(10)).thenReturn(null);
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            undertest.removeUser(10);
+        });
+        //UserEntity entity = new UserEntity(10,"meran","mermer","123",1);
+        String expectedMessage = "Did not find student id 10";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
 
     }
 
     @Test
+    void getUserByIdThrowsError () {
+        Mockito.when(userRepository.findByUserId(10)).thenReturn(null);
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            undertest.getUserById(10);
+        });
+        String expectedMessage = "Did not find student id 10";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void getUserById() {
+
         User user= new User(1,"meran","mermer","123",1);
         undertest.addUser(user);
         ArgumentCaptor<UserEntity>userEntityArgumentCaptor=
@@ -76,16 +109,12 @@ class UserJpaAdapterTest {
         Mockito.when(userRepository.findByUserId(1)).thenReturn(captureUser);
 
         assertThat(undertest.getUserById(1).getUserId()).isEqualTo(captureUser.getUserId());
-
     }
 
     @Test
     void updateUser() {
         User user = new User(1,"meran","mermer","123",1);
-
-
         undertest.updateUser(user);
-
         ArgumentCaptor<UserEntity>userEntityArgumentCaptor=
                 ArgumentCaptor.forClass(UserEntity.class);
         verify(userRepository).save(userEntityArgumentCaptor.capture());
@@ -96,6 +125,4 @@ class UserJpaAdapterTest {
 
         assertThat(capture.getUserId()).isEqualTo(expected);
     }
-
-
 }
