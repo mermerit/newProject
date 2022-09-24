@@ -16,13 +16,9 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 public class CourseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer courseId;
     private String name;
     private Float price;
-
-
-
 }

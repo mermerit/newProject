@@ -11,12 +11,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "userWithCourse")
+@Table(name = "user_with_course")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class UserEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,8 +31,8 @@ public class UserEntity {
             },
             inverseJoinColumns = {
                     @JoinColumn(name = "course_id", referencedColumnName = "courseId")
-            }
-    )
-
+            })
     private Set<CourseList> courses;
+
+
 }

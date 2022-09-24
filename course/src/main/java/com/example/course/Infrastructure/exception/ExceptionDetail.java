@@ -14,7 +14,6 @@ public class ExceptionDetail {
         this.message = message;
         this.detal = detal;
     }
-
     public Date getTimestamp() {
         return timestamp;
     }

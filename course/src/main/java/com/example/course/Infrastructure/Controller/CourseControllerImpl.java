@@ -27,7 +27,6 @@ public class CourseControllerImpl implements CourseController {
     @Autowired
     public CourseControllerImpl(CourseService courseService){
         this.courseService = courseService;
-
     }
 
     @Override
@@ -40,7 +39,6 @@ public class CourseControllerImpl implements CourseController {
         return courseService.addCourse(course);
     }
 
-
     @Override
     public Course findCourseById(Integer courseId) {
         return courseService.getCourseById(courseId);
@@ -49,25 +47,20 @@ public class CourseControllerImpl implements CourseController {
     @Override
     public String deleteCourse(Integer courseId) {
         courseService.remove(courseId);
-
         return "the ID "+courseId+" was deleted";
     }
 
     @Override
-    public Course updateCourse(Course course) {
+    public Course updateCourse(Course course)
+    {
         return courseService.updateCourse(course);
     }
 
-
-
     @Override
-
     public UserEntity add(UserEntity userEntity) {
         template.convertAndSend(UserNotificationConfig.EXCHANGE,UserNotificationConfig.ROUTING_KEYS,userEntity);
         userEntity.setId(userEntity.getId());
-
         return userService.addUser(userEntity);
-
     }
 
     @Override
@@ -93,7 +86,6 @@ public class CourseControllerImpl implements CourseController {
         userService.remove(id);
 
         return "the id "+ id +" was deleted ";
-
     }
 
 

@@ -54,10 +54,7 @@ class UserJpaAdapterTest {
     @Test
     void getAllUser() {
         UserEntity user = new UserEntity(1,"meran","mermer","123",1);
-
         List<UserEntity> userEntity = Collections.singletonList(user);
-
-
         Mockito.when(userRepository.findAll()).thenReturn(userEntity);
         List <User> users=undertest.getAllUser();
         assertThat(users.size()).isEqualTo(1);
@@ -86,29 +83,24 @@ class UserJpaAdapterTest {
 
     @Test
     void getUserByIdThrowsError () {
+        Integer id=10;
         Mockito.when(userRepository.findByUserId(10)).thenReturn(null);
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            undertest.getUserById(10);
+            undertest.getUserById(id);
         });
-        String expectedMessage = "Did not find student id 10";
+        String expectedMessage = "Did not find student id "+id;
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     void getUserById() {
+        UserEntity userEntity = new UserEntity
+                (1,"meran","mermer","123",1);
 
-        User user= new User(1,"meran","mermer","123",1);
-        undertest.addUser(user);
-        ArgumentCaptor<UserEntity>userEntityArgumentCaptor=
-                ArgumentCaptor.forClass(UserEntity.class);
-        verify(userRepository).save(userEntityArgumentCaptor.capture());
+        Mockito.when(userRepository.findByUserId(1)).thenReturn(userEntity);
 
-        UserEntity captureUser=userEntityArgumentCaptor.getValue();
-
-        Mockito.when(userRepository.findByUserId(1)).thenReturn(captureUser);
-
-        assertThat(undertest.getUserById(1).getUserId()).isEqualTo(captureUser.getUserId());
+        assertThat(undertest.getUserById(1).getUserId()).isEqualTo(userEntity.getUserId());
     }
 
     @Test

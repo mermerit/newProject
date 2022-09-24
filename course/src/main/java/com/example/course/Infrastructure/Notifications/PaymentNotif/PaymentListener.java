@@ -14,19 +14,15 @@ public class PaymentListener {
     @RabbitListener(
             queues= PaymentNotificationConfig.QUEUE)
     public void UserNotificationService(Payment payment){
-
         System.out.println(payment.getUserId());
             System.out.println(payment.getCourseId());
             System.out.println(payment.getCoursePrice());
             System.out.println(payment.getPaying());
             System.out.println(new Date());
-
-        try {
+            try {
             TimeUnit.SECONDS.sleep(5);
-
-        } catch (InterruptedException e) {
-
-            throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
         }
     }
 }

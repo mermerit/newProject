@@ -6,10 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CourseJpaConfigration {
-
     @Bean
     public CoursePort getCoursePort (CourseRepository courseRepository){
-
-    return  new CourseJpaAdapter(courseRepository);
+        return  new CourseJpaAdapter(courseRepository);
 }
 }

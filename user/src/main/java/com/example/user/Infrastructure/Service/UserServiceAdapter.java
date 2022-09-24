@@ -1,5 +1,4 @@
 package com.example.user.Infrastructure.Service;
-
 import com.example.user.Domain.User;
 import com.example.user.Domain.UserPort;
 import com.example.user.Infrastructure.VO.ResponceVo;
@@ -9,7 +8,6 @@ import java.util.List;
 
 public class UserServiceAdapter implements UserService{
     private UserPort userPort;
-
     @Autowired
   public   UserServiceAdapter (UserPort userPort){
        this.userPort=userPort;
@@ -44,6 +42,7 @@ public class UserServiceAdapter implements UserService{
 
     @Override
     public ResponceVo getUserWithCourse(Integer id) {
+
         return userPort.getUserWithCourse(id);
     }
 }

@@ -9,17 +9,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 public class CourseJpaAdapter implements CoursePort {
-
     private CourseRepository courseRepository;
-
     @Autowired
     public CourseJpaAdapter(CourseRepository courseRepository){
         this.courseRepository = courseRepository;
     }
-
-
     @Override
     public Course addCourse(Course course) {
     CourseEntity courseEntity = new CourseEntity();
@@ -29,7 +24,6 @@ public class CourseJpaAdapter implements CoursePort {
     }
 
     @Override
-
     public List<Course> getAllCourse() {
         List <Course> courseList = new ArrayList<>();
         List<CourseEntity> courseEntityList = courseRepository.findAll();
@@ -45,17 +39,11 @@ public class CourseJpaAdapter implements CoursePort {
 
     @Override
     public void removeCourse(Integer id) {
-
         CourseEntity courseEntity = new CourseEntity();
-
         Optional<CourseEntity> courseEntityId= Optional.ofNullable(courseRepository.findByCourseId(id));
-
         CourseEntity theCourse  =null;
-
         if (courseEntityId.isPresent()) {
-
             theCourse=courseEntityId.get();
-
         }
         else
         {
@@ -64,10 +52,7 @@ public class CourseJpaAdapter implements CoursePort {
         Course course=  new Course();
         BeanUtils.copyProperties(course, courseEntity);
         courseRepository.delete(theCourse);
-
-        }
-
-
+    }
     @Override
     public Course getCourseById(Integer id) {
         Optional<CourseEntity> courseEntity= Optional.ofNullable(courseRepository.findByCourseId(id));
@@ -83,10 +68,7 @@ public class CourseJpaAdapter implements CoursePort {
         Course course= new Course();
         BeanUtils.copyProperties(theCourse,course);
         return course;
-
-
     }
-
     @Override
     public Course updateCourse(Course course) {
         CourseEntity courseEntity = new CourseEntity();

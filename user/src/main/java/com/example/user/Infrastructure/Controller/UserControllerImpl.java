@@ -1,6 +1,7 @@
 package com.example.user.Infrastructure.Controller;
 
 import com.example.user.Domain.User;
+
 import com.example.user.Infrastructure.Jpa.UserJpaAdapter;
 import com.example.user.Infrastructure.Jpa.UserRepository;
 import com.example.user.Infrastructure.Service.UserService;
@@ -18,15 +19,10 @@ public class UserControllerImpl implements UserController {
     private UserService userService;
     @Autowired
     private UserJpaAdapter userJpaAdapter;
-
-
     @Autowired
     public UserControllerImpl (UserService userService){
         this.userService=userService;
-
-
     }
-
     @Override
     public List<User> getUsers() {
         return userService.getAllUser();
